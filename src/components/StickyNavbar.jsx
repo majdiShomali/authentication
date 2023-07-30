@@ -5,9 +5,19 @@ import {
   Typography,
   Button,
   IconButton,
-  Card,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+
+import {
+  LifebuoyIcon,
+  PowerIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/outline";
+
+import { Link, useNavigate } from "react-router-dom";
  
 export default function StickyNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -63,6 +73,99 @@ export default function StickyNavbar() {
       </Typography>
     </ul>
   );
+
+
+
+  const profileMenuItems = [
+    {
+      label: "Profile",
+      icon: LifebuoyIcon,
+    },
+    {
+      label: "Sign Out",
+      icon: PowerIcon,
+    },
+  ];
+
+  function ProfileMenu() {
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const navigate =useNavigate()
+    const closeMenu = (label) => {
+      setIsMenuOpen(false);
+      if (label == "Sign Out") {
+        localStorage.removeItem("auth");
+        window.location.href = "http://localhost:3000/";
+        console.log(label);
+      } else if (label == "Profile") {
+        navigate("/Profile")        
+      }
+    };
+
+    return (
+      <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
+        <MenuHandler>
+          <Button
+            variant="text"
+            color="blue-gray"
+            className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+          >
+            <svg
+              xmlns="https://source.unsplash.com/MP0IUfwrn0A"
+              className="h-7 w-7 text-amber-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              {" "}
+              <path
+                fillRule="evenodd"
+                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`h-3 w-3 transition-transform text-black ${
+                isMenuOpen ? "rotate-180" : ""
+              }`}
+            />
+          </Button>
+        </MenuHandler>
+        <MenuList className="p-1">
+          {profileMenuItems.map(({ label, icon }, key) => {
+            const isLastItem = key === profileMenuItems.length - 1;
+            return (
+              <MenuItem
+                key={label}
+                onClick={() => {
+                  closeMenu(label);
+                }}
+                className={`flex items-center gap-2 rounded ${
+                  isLastItem
+                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                    : ""
+                }`}
+              >
+                {React.createElement(icon, {
+                  className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+                  strokeWidth: 2,
+                })}
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal"
+                  color={isLastItem ? "red" : "inherit"}
+                >
+                  {label}
+                </Typography>
+              </MenuItem>
+            );
+          })}
+        </MenuList>
+      </Menu>
+    );
+  }
+
+
  
   return (
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
@@ -77,7 +180,19 @@ export default function StickyNavbar() {
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
-           <Link to="login"> <Button
+ 
+            { localStorage.auth !== undefined ?
+            
+            <>
+            <ProfileMenu/>
+                    
+            </>
+            
+            :
+            <>
+            
+            <Link to="login">
+             <Button
               variant="gradient"
               size="sm"
               className="hidden lg:inline-block"
@@ -85,6 +200,12 @@ export default function StickyNavbar() {
               <span>login</span>
             </Button>
             </Link>
+            
+            
+            </>
+            
+            
+            }
             <IconButton
               variant="text"
               className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"

@@ -18,45 +18,8 @@ export default function LogIn() {
         onError: (error) => console.log("Login Failed:", error),
       });
 
-const loginG = async (email00,img)=>{
-console.log(email,password)
-    try {
-
-        const userData = {
-            email: email00,
-            password:"123456",
-            img:img
-          };
-            // Send the data to the server using an HTTP POST request
-            const response = await axios.post(
-              "http://localhost:5000/api/usersLogin",
-              userData
-            );
-            console.log("Data inserted:", response.data);
-            if(response.data.error != 'incorrect password'){
-             console.log("success")
-             console.log(response.data.token);
-               localStorage.setItem("auth",(response.data.token))
-               window.location.href = 'http://localhost:3000/';
-            }else{
-              console.log("failed")
-            }
-            
-          } catch (error) {
-
-
-
-}
-
-}
-
     useEffect( () => {
         if (user0.length !== 0) {
-            console.log(user0)
-            let token =user0.access_token
-        //     localStorage.setItem("auth",token)
-        //   window.location.href = 'http://localhost:3000/';
-
           axios
             .get(
               `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user0.access_token}`
@@ -69,28 +32,13 @@ console.log(email,password)
               }
             )
             .then((res) => {
-              setProfile(res.data);
-              setErrorG("");
-              setemail(res.data.email)
-              setpassword("123456")
-              console.log(res.data)
-              let eeee=res.data.email
-              loginG(eeee,res.data.picture)
-              const user0Data = {
-                firstName:res.data.name,
-                email: res.data.email,
-                password:"123456",
-                role: 0 ,
-              }
               axios
-          .post("http://localhost:5000/api/users",user0Data)
+          .post("http://localhost:5000/api/newUserGoogle",res.data)
           .then((response) => {
-            console.log(response);
+            localStorage.setItem("auth",response.data.token)
           })
           .catch((err) => console.log(err.message));
-          console.log(err);
-                  //   localStorage.setItem("auth",token)
-                 //   window.location.href = 'http://localhost:3000/';
+           //   window.location.href = 'http://localhost:3000/';
 
       })
             .catch((err) => console.log(err.message));
