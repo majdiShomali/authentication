@@ -103,12 +103,12 @@ export default function StickyNavbar() {
     };
 
     return (
-      <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
+      <Menu  open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end"  >
         <MenuHandler>
           <Button
             variant="text"
             color="blue-gray"
-            className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+            className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto hidden lg:flex "
           >
             <svg
               xmlns="https://source.unsplash.com/MP0IUfwrn0A"
@@ -186,7 +186,7 @@ export default function StickyNavbar() {
             { localStorage.auth !== undefined ?
             
             <>
-            <ProfileMenu/>
+            <ProfileMenu />
                     
             </>
             

@@ -23,7 +23,7 @@ const style = {
 function EditProfile() {
 
   const { user, setUser } = useContext(UserContext);
-
+  const {userUpdateRefresh ,setUpdateRefresh} = useContext(UserContext);
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -59,7 +59,7 @@ function EditProfile() {
       )
       .then(function (response) {
         console.log(response);
-        // updateProfileRefresh(response)
+         setUpdateRefresh(response.data)
         handleClose()
       })
       .catch(function (error) {

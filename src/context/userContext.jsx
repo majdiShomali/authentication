@@ -6,6 +6,8 @@ export const UserContext = createContext();
 const UserProvider = ( {children} ) => {
   
     const [user ,setUser] = useState(null)
+    const [userUpdateRefresh ,setUpdateRefresh] = useState(null)
+
     const fetchProtectedData = async () => {
       try {
         const token = localStorage.getItem("auth");
@@ -31,14 +33,15 @@ const UserProvider = ( {children} ) => {
     if(localStorage.auth !== undefined){   
       fetchProtectedData()
     }
-  },[])
+  },[userUpdateRefresh])
  
 
   return (
         <>
             <UserContext.Provider
                 value={{
-                    user,setUser
+                    user,setUser,
+                    userUpdateRefresh,setUpdateRefresh
                 }}
             >
                 {children}

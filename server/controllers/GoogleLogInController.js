@@ -43,6 +43,7 @@ const newUserGoogle = async (req, res) => {
   }
 };
 
+
 module.exports = {
   newUserGoogle,
 };

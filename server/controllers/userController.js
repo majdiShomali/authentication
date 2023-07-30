@@ -102,7 +102,6 @@ const updateUser = async (req, res) => {
   const image = req.file.path
   const { userName } = req.body;
   const userId  = req.params.id;
-  console.log(image,userName,userId)
     const user = await User.findByIdAndUpdate(userId, {userName:userName,img:image}, { new: true });
     const updatedUser = await user.save();
     res.json(updatedUser);
