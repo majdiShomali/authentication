@@ -57,9 +57,9 @@ export default function LogIn() {
       console.log(response.data.error);
       if (response.data.error !== "incorrect password" && response.data.error === undefined) {
         localStorage.setItem("auth", response.data.token);
-        setpasswordp("");
         window.location.href = "http://localhost:3000/";
         setpasswordp("");
+        setemailp("");
       } else {
         setpasswordp(response.data.error === "incorrect password" ? "incorrect password": "");
         setemailp(response.data.error === "incorrect password" ? " ": response.data.error );

@@ -11,10 +11,7 @@ module.exports = (req,res,next)=>{
       console.log("token error:", err); // Log the error object for debugging
       return res.status(403).json({ message: 'Failed to authenticate token.' });
     }
-    console.log("token Authenticated");
     req.user=decoded
-    next();
-    
-    // res.json({ message: 'Authenticated', user: decoded });
+    next();  
   });
   };

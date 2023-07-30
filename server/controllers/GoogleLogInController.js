@@ -10,14 +10,14 @@ const newUserGoogle = async (req, res) => {
   if (userExist.length == 0) {
     const hashPassword = await bcrypt.hash(id, 5);
     const NewUser = new User({
-      username: name,
+      userName: name,
       email: email,
       password: hashPassword,
       role: 0,
     });
     const user = await NewUser.save();
     const token = jwt.sign(
-      { id: user._id, username: user.username, role: user.role },
+      { id: user._id, userName: user.userName, role: user.role },
       SECRETKEY,
       { expiresIn: "24h" }
     );
@@ -32,7 +32,7 @@ const newUserGoogle = async (req, res) => {
 
     if (validpassword) {
       const token = jwt.sign(
-        { id: userExist[0]._id, username: userExist[0].username, role: userExist[0].role },
+        { id: userExist[0]._id, userName: userExist[0].userName, role: userExist[0].role },
         SECRETKEY,
         { expiresIn: "24h" }
       );

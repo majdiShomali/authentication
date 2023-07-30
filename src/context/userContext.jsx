@@ -22,7 +22,7 @@ const UserProvider = ( {children} ) => {
         localStorage.removeItem("auth");
         window.location.href = "http://localhost:3000/Login";
       } finally {
-        console.log(false);
+        // console.log(false);
       }
     };
   

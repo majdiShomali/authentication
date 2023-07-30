@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import StickyNavbar from "./components/StickyNavbar";
 import Login from "./pages/registration/Login";
 import SignUp from "./pages/registration/SignUp"
-import UserProfile from "./pages/registration/user/UserProfile";
+import UserProfile from "./pages/user/UserProfile";
 
 
 function App() {

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 //1- Create a new schema 
 const userSchema = new Schema({   
-    username: {
+    userName: {
         type : String,
         required : true
     },
@@ -20,7 +20,8 @@ const userSchema = new Schema({
     },
     img:{
         type : String,
-        required : false
+        required : false,
+        default : 'public\\images\\image_1690729480476.png',
     },
     role:{
         type : Number,

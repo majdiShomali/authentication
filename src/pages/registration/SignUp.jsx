@@ -35,7 +35,7 @@ export default function Signup() {
       validatePhone(phone)
     ) {
       const userData = {
-        username: name,
+        userName: name,
         email: email,
         password: password,
         phone: phone,
@@ -50,7 +50,7 @@ export default function Signup() {
         );
         setemailp(response.data.error)
         localStorage.setItem("auth", response.data.token);
-        // window.location.href = "http://localhost:3000/";
+        window.location.href = "http://localhost:3000/";
       } catch (error) {
         console.error("Error inserting data:", error);
       }

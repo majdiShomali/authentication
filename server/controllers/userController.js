@@ -53,13 +53,13 @@ const oneUser =  async (req, res) => {
 
 
 const newUser =  async (req, res) => {
-    const { username, email , password ,role,phone } = req.body;
+    const { userName, email , password ,role,phone } = req.body;
     const user = await User.find({ email: email });
     if(user.length === 0 ){
       const hashPassword = await bcrypt.hash(password, 5)
-      const user = new User({ username: username, email: email,password:hashPassword,role:role ,phone:phone});
+      const user = new User({ userName: userName, email: email,password:hashPassword,role:role ,phone:phone});
       const newUser = await user.save();
-      const token = jwt.sign({ id: user._id, username: user.firstName ,role : user.role }, SECRETKEY, { expiresIn: '24h' }); 
+      const token = jwt.sign({ id: user._id, userName: user.userName ,role : user.role }, SECRETKEY, { expiresIn: '24h' }); 
       res.json({ token ,newUser});
     }else{  
       res.json({ error: 'user alredy exist' });
@@ -82,7 +82,7 @@ const newUserLogin =  async (req , res) => {
     }
 if(validpassword){
 
-  const token = jwt.sign({ id: user[0]._id, username: user[0].firstName ,role : user[0].role }, SECRETKEY, { expiresIn: '24h' });
+  const token = jwt.sign({ id: user[0]._id, userName: user[0].userName ,role : user[0].role }, SECRETKEY, { expiresIn: '24h' });
 const user0=user[0]
   res.json({ token ,user0});
 }
@@ -98,6 +98,15 @@ const deleteUser = async (req, res) => {
     res.status(204).json(User);
 };
 
+const updateUser = async (req, res) => {
+  const image = req.file.path
+  const { userName } = req.body;
+  const userId  = req.params.id;
+  console.log(image,userName,userId)
+    const user = await User.findByIdAndUpdate(userId, {userName:userName,img:image}, { new: true });
+    const updatedUser = await user.save();
+    res.json(updatedUser);
+};
 
 module.exports = {
   allUsers,
@@ -107,6 +116,7 @@ module.exports = {
   newUserLogin,
   allProviders,
   allAdmins,
-  userData
+  userData,
+  updateUser
 }; 
 
