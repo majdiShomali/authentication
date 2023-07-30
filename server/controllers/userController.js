@@ -53,15 +53,16 @@ const oneUser =  async (req, res) => {
 
 
 const newUser =  async (req, res) => {
-    const { firstName, email , password ,role,AllIngredientsId,phone } = req.body;
-    const user0 = await User.find({ email: email });
-    if(user0.length == 0 ){
+    const { username, email , password ,role,phone } = req.body;
+    const user = await User.find({ email: email });
+    if(user.length === 0 ){
       const hashPassword = await bcrypt.hash(password, 5)
-      const user = new User({ firstName: firstName, email: email,password:hashPassword,role:role,AllIngredientsId:AllIngredientsId ,phone:phone});
-      const user0 = await user.save();
+      const user = new User({ username: username, email: email,password:hashPassword,role:role ,phone:phone});
+      const newUser = await user.save();
       const token = jwt.sign({ id: user._id, username: user.firstName ,role : user.role }, SECRETKEY, { expiresIn: '24h' }); 
-      res.json({ token ,user0});
+      res.json({ token ,newUser});
     }else{  
+      res.json({ error: 'user alredy exist' });
   }
 };
 
@@ -86,6 +87,8 @@ const user0=user[0]
   res.json({ token ,user0});
 }
 
+}else{
+  res.json({ error: 'no user found check your email' });
 }
 };
 

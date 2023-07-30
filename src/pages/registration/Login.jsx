@@ -54,21 +54,19 @@ export default function LogIn() {
         "http://localhost:5000/api/usersLogin",
         userData
       );
-      console.log("Data inserted:", response.data);
-
-      if (response.data.error != "incorrect password") {
-        console.log("success");
+      console.log(response.data.error);
+      if (response.data.error !== "incorrect password" && response.data.error === undefined) {
         localStorage.setItem("auth", response.data.token);
         setpasswordp("");
         window.location.href = "http://localhost:3000/";
         setpasswordp("");
       } else {
-        setpasswordp("incorrect password");
-        console.log("failed");
+        setpasswordp(response.data.error === "incorrect password" ? "incorrect password": "");
+        setemailp(response.data.error === "incorrect password" ? " ": response.data.error );
       }
     } catch (error) {
       console.error("Error inserting data:", error);
-      console.log("error");
+      console.log(error.message);
     }
   };
   return (

@@ -35,23 +35,22 @@ export default function Signup() {
       validatePhone(phone)
     ) {
       const userData = {
-        firstName: name,
+        username: name,
         email: email,
         password: password,
         phone: phone,
         role: type === "user" ? 0 : 2,
       };
-
+       console.log(userData);
       try {
         // Send the data to the server using an HTTP POST request
         const response = await axios.post(
           "http://localhost:5000/api/users",
           userData
         );
-
+        setemailp(response.data.error)
         localStorage.setItem("auth", response.data.token);
-
-        window.location.href = "http://localhost:3000/";
+        // window.location.href = "http://localhost:3000/";
       } catch (error) {
         console.error("Error inserting data:", error);
       }
