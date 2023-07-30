@@ -9,6 +9,7 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
+  Collapse,
 } from "@material-tailwind/react";
 
 import {
@@ -97,7 +98,7 @@ export default function StickyNavbar() {
         window.location.href = "http://localhost:3000/";
         console.log(label);
       } else if (label == "Profile") {
-        navigate("/Profile")        
+        navigate("/UserProfile")        
       }
     };
 
@@ -168,18 +169,19 @@ export default function StickyNavbar() {
 
  
   return (
-    <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
+    <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll p-5">
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
+          <Link to="/">
           <Typography
-            as="a"
-            href="#"
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
             Material Tailwind
           </Typography>
+          </Link>
+          <div className="mr-4 hidden lg:block">{navList}</div>
+
           <div className="flex items-center gap-4">
-            <div className="mr-4 hidden lg:block">{navList}</div>
  
             { localStorage.auth !== undefined ?
             
@@ -245,12 +247,12 @@ export default function StickyNavbar() {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <Button variant="gradient" size="sm" fullWidth className="mb-2">
             <span>Buy Now</span>
           </Button>
-        </MobileNav>
+        </Collapse>
       </Navbar>
      
     </div>

@@ -89,26 +89,6 @@ const user0=user[0]
 }
 };
 
-
-const updateUser = async (req, res) => {
-  const image = req.file.path
-  const { firstName } = req.body;
-  const userId  = req.params.id;
-    // const updatedUserData = req.body;
-    // updatedUserData.password= await bcrypt.hash(updatedUserData.password, 5)
-    const user = await User.findByIdAndUpdate(userId, {firstName:firstName,img:image}, { new: true });
-    const updatedUser = await user.save();
-    res.json(updatedUser);
-};
-const updateUserList = async (req, res) => {
-  const userId  = req.params.id;
-    const updatedUserData = req.body;
-    // updatedUserData.password= await bcrypt.hash(updatedUserData.password, 5)
-    const user = await User.findByIdAndUpdate(userId,updatedUserData, { new: true });
-    const updatedUser = await user.save();
-    res.json(updatedUser);
-};
-
 const deleteUser = async (req, res) => {
    const userId = req.params.id;
     await User.findByIdAndDelete(userId);
@@ -116,57 +96,14 @@ const deleteUser = async (req, res) => {
 };
 
 
-
-
-
-
-// Protected route
-const protected = async  (req, res) => {
-  const token = req.headers.authorization.trim();
-  console.log(token)
-  if (!token) {
-    return res.status(401).json({ message: 'No token provided.' });
-  }
-  jwt.verify(token, SECRETKEY, (err, decoded) => {
-    if (err) {
-      console.log("token error:", err); // Log the error object for debugging
-      return res.status(403).json({ message: 'Failed to authenticate token.' });
-    }
-    console.log("token Authenticated");
-    res.json({ message: 'Authenticated', user: decoded });
-  });
-};
-
-const usersMessages = (req, res) => {
-  User.find({ message: { $exists: true, $ne: [] } })
-    .then((data) => {
-     
-      res.json(data);
-    })
-    .catch((error) => {
-      errorHandler(error, req, res);
-    });
-};
-const newUserContactUs =  async (req, res) => {
-  const userId  = req.params.id;
-  const updatedUserData = req.body;
-  const user = await User.findByIdAndUpdate(userId, updatedUserData, { new: true });
-  const updatedUser = await user.save();
-  res.json(updatedUser);
-
-};
 module.exports = {
   allUsers,
   newUser,
   oneUser,
-  updateUser,
   deleteUser,
   newUserLogin,
-  protected,
   allProviders,
   allAdmins,
-  updateUserList,
-  usersMessages,
-  newUserContactUs,
   userData
 }; 
+

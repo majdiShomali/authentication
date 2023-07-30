@@ -5,8 +5,13 @@ import Home from "./pages/Home";
 import StickyNavbar from "./components/StickyNavbar";
 import Login from "./pages/registration/Login";
 import SignUp from "./pages/registration/SignUp"
+import UserProfile from "./pages/registration/user/UserProfile";
+
+
 function App() {
   const [hideRouter1, setHideRouterUser] = useState(false);
+
+
 
   const AppRouter1 = () => {
     return (
@@ -15,6 +20,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />    
           <Route path="/login" element={<Login />} />    
+          <Route path="/UserProfile" element={<UserProfile />} />    
           <Route path="/Signup/:type" element={<SignUp />} />    
         </Routes>
       </Router>
