@@ -38,9 +38,9 @@ export default function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link onClick={()=>setOpenNav(false)} to="/" className="flex items-center">
           Pages
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -48,9 +48,9 @@ export default function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link onClick={()=>setOpenNav(false)} to="/" className="flex items-center">
           Account
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -58,9 +58,9 @@ export default function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link onClick={()=>setOpenNav(false)} to="/" className="flex items-center">
           Blocks
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -68,9 +68,9 @@ export default function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link  onClick={()=>setOpenNav(false)} to="/" className="flex items-center">
           Docs
-        </a>
+        </Link>
       </Typography>
     </ul>
   );
@@ -169,8 +169,8 @@ export default function StickyNavbar() {
 
  
   return (
-    <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll p-5">
-      <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4">
+      
+      <Navbar className="max-h-[768px] max-w-[100%] w-[100%]  px-10 sticky top-0 z-10">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link to="/">
           <Typography
@@ -249,12 +249,12 @@ export default function StickyNavbar() {
         </div>
         <Collapse open={openNav}>
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
+          <Button onClick={() => setOpenNav(false)}
+          variant="gradient" size="sm" fullWidth className="mb-2">
             <span>Buy Now</span>
           </Button>
         </Collapse>
       </Navbar>
      
-    </div>
   );
 }

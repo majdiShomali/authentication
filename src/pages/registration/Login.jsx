@@ -17,29 +17,42 @@ export default function LogIn() {
   });
 
   useEffect(() => {
-    if (userGoogle.length !== 0) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userGoogle.access_token}`,
-          {
+
+
+    const getGoogleLogin = async ()=>{
+    
+      if (userGoogle.length !== 0) {
+        try {
+          const response = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userGoogle.access_token}`, {
             headers: {
               Authorization: `Bearer ${userGoogle.access_token}`,
               Accept: "application/json",
             },
+          });
+      
+          try {
+            console.log(response.data)
+            const newUserResponse = await axios.post("http://localhost:5000/api/newUserGoogle", response.data);
+            localStorage.setItem("auth", newUserResponse.data.token);
+            window.location.href = "http://localhost:3000/";
+          } catch (err) {
+            console.log(err);
+            setpasswordp(err.response.data.message);
           }
-        )
-        .then((res) => {
-          axios
-            .post("http://localhost:5000/api/newUserGoogle", res.data)
-            .then((response) => {
-              localStorage.setItem("auth", response.data.token);
-              window.location.href = "http://localhost:3000/";
-            })
-            .catch((err) => console.log(err.message));
-        })
-        .catch((err) => console.log(err.message));
+        } catch (err) {
+          console.log(err.message);
+        }
+      }
+      
+      
     }
-  }, [userGoogle]);
+    
+    
+    
+    getGoogleLogin()
+    
+      
+      }, [userGoogle]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

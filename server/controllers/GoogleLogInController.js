@@ -3,9 +3,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const SECRETKEY = process.env.SECRETKEY;
 
+
 const newUserGoogle = async (req, res) => {
   const { name, email, picture, verified_email, id } = req.body;
   const userExist = await User.find({ email: email });
+
 
   if (userExist.length == 0) {
     const hashPassword = await bcrypt.hash(id, 5);
@@ -27,7 +29,7 @@ const newUserGoogle = async (req, res) => {
     const validpassword = await bcrypt.compare(id, userExist[0].password);
 
     if (!validpassword) {
-      return res.json({ error: "incorrect password" });
+      return res.status(500).json({ message: "incorrect password" });
     }
 
     if (validpassword) {
@@ -39,7 +41,6 @@ const newUserGoogle = async (req, res) => {
       const user = userExist[0];
       res.json({ token, user });
     }
-
   }
 };
 
