@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Navbar,
-  MobileNav,
   Typography,
   Button,
   IconButton,
@@ -93,11 +92,11 @@ export default function StickyNavbar() {
     const navigate =useNavigate()
     const closeMenu = (label) => {
       setIsMenuOpen(false);
-      if (label == "Sign Out") {
+      if (label === "Sign Out") {
         localStorage.removeItem("auth");
         window.location.href = "http://localhost:3000/";
         console.log(label);
-      } else if (label == "Profile") {
+      } else if (label === "Profile") {
         navigate("/UserProfile")        
       }
     };
