@@ -110,6 +110,7 @@ export default function Signup() {
             <img
               src="https://www.drupal.org/files/project-images/reg_confirm_email_with_button_0.png"
               className="w-32 mx-auto"
+              alt="aaaa"
             />
           </div>
           <div className="mt-12 flex flex-col items-center">
@@ -183,7 +184,9 @@ export default function Signup() {
           </div>
         </div>
         <div className="flex-1 bg-indigo-100 text-center hidden lg:flex login_img bg-cover bg-center bg-no-repeat ">
-          <img src="" />
+          <img src="" 
+          alt="aaaa"
+          />
         </div>
       </div>
     </div>
