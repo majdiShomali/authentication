@@ -63,13 +63,13 @@ export default function LogIn() {
     try {
       // Send the data to the server using an HTTP POST request
       const response = await axios.post(
-        "http://localhost:5000/api/usersLogin",
+        "https://dashing-melomakarona-cb08ed.netlify.app/api/usersLogin",
         userData
       );
       console.log(response.data.error);
       if (response.data.error !== "incorrect password" && response.data.error === undefined) {
         localStorage.setItem("auth", response.data.token);
-        window.location.href = "http://localhost:3000/";
+        // window.location.href = "http://localhost:3000/";
         setpasswordp("");
         setemailp("");
       } else {
