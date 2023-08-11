@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -9,7 +9,7 @@ import UserProfile from "./pages/user/UserProfile";
 
 
 function App() {
-  const [hideRouter1, setHideRouterUser] = useState(false);
+  const [hideRouter1] = useState(false);
 
 
 

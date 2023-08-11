@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function LogIn() {
   const [email, setemail] = useState("");
@@ -9,7 +9,6 @@ export default function LogIn() {
   const [password, setpassword] = useState("");
   const [passwordp, setpasswordp] = useState("");
   const [userGoogle, setUserGoogle] = useState([]);
-  const [errorG, setErrorG] = useState("");
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUserGoogle(codeResponse),
@@ -90,6 +89,7 @@ export default function LogIn() {
             <img
               src="https://www.drupal.org/files/project-images/reg_confirm_email_with_button_0.png"
               className="w-32 mx-auto"
+              alt="aaa"
             />
           </div>
           <div className="mt-12 flex flex-col items-center">
@@ -186,7 +186,8 @@ export default function LogIn() {
           </div>
         </div>
         <div className="flex-1 bg-indigo-100 text-center hidden lg:flex imageSign bg-cover bg-center bg-no-repeat ">
-          <img src="https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/chef-cooking.jpg?quality=82&strip=1" />
+          <img src="https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/chef-cooking.jpg?quality=82&strip=1" 
+          alt="aaaa"/>
         </div>
       </div>
     </div>
