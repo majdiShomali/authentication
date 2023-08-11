@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import StickyNavbar from "./components/StickyNavbar";
-import Login from "./pages/registration/Login";
-import SignUp from "./pages/registration/SignUp"
-import UserProfile from "./pages/user/UserProfile";
+// import StickyNavbar from "./components/StickyNavbar";
+// import Login from "./pages/registration/Login";
+// import SignUp from "./pages/registration/SignUp"
+// import UserProfile from "./pages/user/UserProfile";
 
 
 function App() {
@@ -16,12 +16,12 @@ function App() {
   const AppRouter1 = () => {
     return (
       <Router>
-        <StickyNavbar/>
+        {/* <StickyNavbar/> */}
         <Routes>
           <Route index element={<Home />} />    
-          <Route path="/login" element={<Login />} />    
-          <Route path="/UserProfile" element={<UserProfile />} />    
-          <Route path="/Signup/:type" element={<SignUp />} />    
+          {/* <Route path="/login" element={<Login />} />     */}
+          {/* <Route path="/UserProfile" element={<UserProfile />} />     */}
+          {/* <Route path="/Signup/:type" element={<SignUp />} />     */}
         </Routes>
       </Router>
     );
